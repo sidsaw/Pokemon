@@ -1,7 +1,7 @@
 from flask import Flask, request
 app = Flask(__name__)
 
-print("Starting up the Pokémon Server")
+print("Starting Pokemon Server!")
 
 # Listen for post requests
 @app.route('/', methods=['GET', 'POST'])
