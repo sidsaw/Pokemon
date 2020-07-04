@@ -35,8 +35,9 @@ def server():
 			# TODO Update database with stats for new files
 			print("Printing files")
 			for file in files:
-				filebytes = bytes(file)
-				print(filebytes.decode("utf-8"))
+				print(file)
+				#filebytes = bytes(file)
+				#print(filebytes.decode("utf-8"))
 			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
 			data = {
 				'log': logstring
