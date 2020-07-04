@@ -12,14 +12,25 @@ def server():
 		# if fileids is in data
 		if requestdata.get('fileids') != None:
 			fileids = requestdata.get('fileids')
-			data = {'message': 'Received post request and fileids'}
+			print('fileids')
+			print(fileids)
+			data = {
+				'message': 'Received post request and fileids',
+				'idsneeded': fileids
+			}
 			return jsonify(data)
 
 		else:
-			data = {'message': 'Received post request but did not find fileids'}
+			# TODO change to sending back a status code as well
+			data = {
+				'message': 'Received post request but did not find fileids'
+			}
 			return jsonify(data)
 
-	data = {'message': 'Did not receive post request'}
+	# TODO change to sending back a status code as well
+	data = {
+		'message': 'Did not receive post request'
+	}
 	return jsonify(data)
 
 
