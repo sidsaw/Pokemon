@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import json
+import base64
 app = Flask(__name__)
 
 print("Starting Pokemon Server!")
@@ -35,11 +36,10 @@ def server():
 			# TODO Update database with stats for new files
 			print("Printing files")
 			for file in files:
-				print("type(file)")
-				print(type(file))
-				print("type(file[0])")
-				print(type(file[0]))
 				print(file)
+				print()
+				print()
+				print(base64.b64decode(file))
 				#filebytes = bytes(file)
 				#print(filebytes.decode("utf-8"))
 			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
