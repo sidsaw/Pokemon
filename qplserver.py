@@ -8,9 +8,10 @@ print("Starting Pokemon Server!")
 @app.route('/', methods=['GET', 'POST'])
 def server():
 	if request.method == 'POST':
+		requestdata = request.get_json()
 		# if fileids is in data
-		if request.args.get('fileids') != None:
-			fileids = request.args.get('fileids')
+		if requestdata.get('fileids') != None:
+			fileids = requestdata.get('fileids')
 			data = {'message': 'Received post request and fileids'}
 			return jsonify(data)
 
