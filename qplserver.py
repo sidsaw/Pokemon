@@ -28,24 +28,18 @@ def server():
 			print("detected files and idsneeded in form data")
 			files = requestdata.get('files')
 			idsneeded = requestdata.get('idsneeded')
+			# decode files to string
+			decodedfiles = []
+			for file in files:
+				decodedfiles.append(base64.b64decode(file).decode("utf-8"))
+
+			
 			# TODO Parse files for replayid
 			# TODO check if replay was already parsed
 			droppedids = []
 			# TODO change statement below
 			parsedids = idsneeded
 			# TODO Update database with stats for new files
-			decodedfiles = []
-			for file in files:
-				decodedfiles.append(base64.b64decode(file).decode("utf-8"))
-
-			print(len(decodedfiles))
-			for d in decodedfiles:
-				print()
-				print()
-				print()
-				print()
-				print(d)
-
 			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
 			data = {
 				'log': logstring
