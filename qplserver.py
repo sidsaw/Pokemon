@@ -22,7 +22,7 @@ def server():
 			return jsonify(data)
 
 		# if files and neededids are in data
-		else if (requestdata.get('files') != None and
+		elif (requestdata.get('files') != None and
 				requestdata.get('idsneeded') != None):
 			print("detected files and idsneeded in form data")
 			files = requestdata.get('files')
