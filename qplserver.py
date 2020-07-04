@@ -34,14 +34,10 @@ def server():
 			# TODO change statement below
 			parsedids = idsneeded
 			# TODO Update database with stats for new files
-			print("Printing files")
+			decodedfiles = []
 			for file in files:
-				print(file)
-				print()
-				print()
-				print(base64.b64decode(file))
-				#filebytes = bytes(file)
-				#print(filebytes.decode("utf-8"))
+				print(base64.b64decode(file).decode("utf-8"))
+				decodedfiles.append(base64.b64decode(file))
 			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
 			data = {
 				'log': logstring
