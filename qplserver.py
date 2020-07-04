@@ -39,7 +39,7 @@ def server():
 				print(type(file))
 				print("type(file[0])")
 				print(type(file[0]))
-				#print(file)
+				print(file)
 				#filebytes = bytes(file)
 				#print(filebytes.decode("utf-8"))
 			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
