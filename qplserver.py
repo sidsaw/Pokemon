@@ -36,7 +36,7 @@ def server():
 			print("Printing files")
 			for file in files:
 				print(files)
-			logstring = 'Updated replays with fileids: ' + parsedids + ' ignored replayed with fileids: ' + droppedids
+			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) + ' ignored replayed with fileids: ' + ' '.join(droppedids)
 			data = {
 				'log': logstring
 			}
