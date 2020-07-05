@@ -339,8 +339,8 @@ printable = set(string.printable)
 replay = ''.join(filter(lambda x: x in printable, replay))
 
 
-print(re.search('(?<=gen[0-9]ou-)[0-9]+', replay))
-
+print(re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0))
+print(type(re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)))
 
 
 
