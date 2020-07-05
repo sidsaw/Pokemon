@@ -36,7 +36,7 @@ def server():
 				replay = base64.b64decode(file).decode("utf-8")
 				# replace non ascii characters
 				printable = set(string.printable)
-				replay = filter(lambda x: x in printable, replay)
+				replay = ''.join(filter(lambda x: x in printable, replay))
 				decodedfiles.append(replay)
 				print(replay)
 
