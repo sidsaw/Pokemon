@@ -52,8 +52,8 @@ def server():
 			# TODO change statement below
 			parsedids = idsneeded
 			# TODO Update database with stats for new files
-			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids)
-			+ ' ignored replays with fileids: ' + ' '.join(alreadyparsed)
+			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) \
+			+ ' ignored replays with fileids: ' + ' '.join(alreadyparsed) \
 			+ ' could not parse: ' + str(len(droppedfiles)) + ' files'
 			data = {
 				'log': logstring
