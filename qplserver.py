@@ -41,8 +41,11 @@ def server():
 				print(replay)
 
 			# Parse files for replayid
-			#for d in decodedfiles:
-				# replace non ascii characters
+			for d in decodedfiles:
+				# get replayid
+				replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)
+				print(replayid)
+				# error checking if id wasn't found
 				
 
 				# match the replayid
