@@ -12,8 +12,8 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 <input type="hidden" name="replayid" value="gen5ou-1122450180" />
 <div class="battle"></div><div class="battle-log"></div><div class="replay-controls"></div><div class="replay-controls-2"></div>
 <h1 style="font-weight:normal;text-align:center"><strong>[Gen 5] OU</strong><br /><a href="http://pokemonshowdown.com/users/eviolitemachop" class="subtle" target="_blank">eviolitemachop</a> vs. <a href="http://pokemonshowdown.com/users/samsarin23" class="subtle" target="_blank">samsarin23</a></h1>
-<script type="text/plain" class="battle-log-data">|j|☆eviolitemachop
-|j|☆samsarin23
+<script type="text/plain" class="battle-log-data">|j|eviolitemachop
+|j|samsarin23
 |player|p1|eviolitemachop|burglar|
 |player|p2|samsarin23|102|
 |teamsize|p1|6
@@ -126,10 +126,10 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 |turn|7
 
 
-|c|☆eviolitemachop|F
+|c|eviolitemachop|F
 
 
-|c|☆eviolitemachop|i keep missing hydro pumps
+|c|☆violitemachop|i keep missing hydro pumps
 
 
 |
@@ -142,10 +142,10 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 |turn|8
 
 
-|c|☆eviolitemachop|LOL
+|c|eviolitemachop|LOL
 
 
-|c|☆eviolitemachop|gd
+|c|eviolitemachop|gd
 
 
 |
@@ -159,7 +159,7 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 |upkeep
 
 
-|c|☆eviolitemachop|finally
+|c|eviolitemachop|finally
 
 
 |
@@ -322,7 +322,7 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 |win|samsarin23
 
 
-|c|☆samsarin23|gg
+|c|samsarin23|gg
 
 
 |l| sooperdooperman
