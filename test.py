@@ -336,7 +336,7 @@ let daily = Math.floor(Date.now()/1000/60/60/24);document.write('<script src="ht
 """
 
 printable = set(string.printable)
-replay = filter(lambda x: x in printable, replay)
+replay = ''.join(filter(lambda x: x in printable, replay))
 
 
 print(re.search('(?<=gen[0-9]ou-)[0-9]+', replay))
