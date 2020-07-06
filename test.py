@@ -350,12 +350,17 @@ else:
 conn = connect('/home/ec2-user/Pokemon/pokemon.db')
 curs = conn.cursor()
 
-sqlcommand = "SELECT * FROM users"
+Sid = 'Sid'
+
+sqlcommand = "SELECT Username FROM users WHERE Name=" + Sid
 curs.execute(sqlcommand)
 
 results = curs.fetchall()
 
+print(type(results))
+
 for row in results:
+	print(type(row))
 	print(row)
 
 

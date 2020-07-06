@@ -16,6 +16,8 @@ print("Starting Pokemon Server!")
 # Listen for post requests
 @app.route('/', methods=['GET', 'POST'])
 def server():
+	conn = connect('/home/ec2-user/Pokemon/pokemon.db')
+	curs = conn.cursor()
 	if request.method == 'POST':
 		print("detected post request")
 		requestdata = request.get_json()
@@ -24,6 +26,11 @@ def server():
 			print("detected fileids in form data")
 			fileids = requestdata.get('fileids')
 			# TODO query database and find which file ids needed
+			for f in fileids:
+				print(type(f))
+				print(f)
+				statement = "SELECT ReplayID FROM replays WHERE FileID=" + 
+
 			data = {
 				'log': 'Received post request and fileids',
 				'idsneeded': fileids
