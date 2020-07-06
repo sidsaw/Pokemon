@@ -359,6 +359,9 @@ results = curs.fetchall()
 
 print(results)
 
+if not results:
+	print("empty")
+
 print(type(results))
 
 # for row in results:
