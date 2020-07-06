@@ -3,7 +3,7 @@ import json
 import base64
 import re
 import string
-import sqlite3
+from sqlite3 import connect
 app = Flask(__name__)
 
 class File:
