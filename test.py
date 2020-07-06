@@ -360,8 +360,8 @@ results = curs.fetchall()
 print(type(results))
 
 for row in results:
-	print(type(row))
-	print(row)
+	print(type(row[0]))
+	print(row[0])
 
 
 
