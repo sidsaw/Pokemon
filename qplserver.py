@@ -82,11 +82,15 @@ def decodeandparse(files, idsneeded, curs):
 	for d in decodedfiles:
 		# get replayid
 		if re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata) != None:
-			replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata).group(0)	
+			replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata).group(0)
+			print("replayid")
+			print(replayid)	
 			# Query database to see if this replayid wasn't already parsed
 			statement = "SELECT FileID FROM replays WHERE ReplayID=?"
 			curs.execute(statement, (replayid,))
 			result = curs.fetchall()
+			print("result")
+			print(result)
 			# if replayID doesnt exist in sheet
 			if not result:
 				# add file to filestoparse
