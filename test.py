@@ -1,6 +1,6 @@
 import re
 import string
-import sqlite3
+from sqlite3 import connect
 replay = """
 <!DOCTYPE html>
 <meta charset="utf-8" />
