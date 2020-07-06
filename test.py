@@ -351,6 +351,7 @@ conn = connect('/home/ec2-user/Pokemon/pokemon.db')
 curs = conn.cursor()
 
 sqlcommand = "SELECT * FROM users"
+curs.execute(sqlcommand)
 
 results = curs.fetchall()
 
