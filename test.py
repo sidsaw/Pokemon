@@ -348,12 +348,12 @@ else:
 
 # Replace username with your own A2 Hosting account username:
 conn = connect('/home/ec2-user/Pokemon/pokemon.db')
-curs = conn.cursor()
+curs = conn.cursor(prepared=True)
 
-Sid = "'Sid'"
+Sid = "Sid"
 
-sqlcommand = "SELECT Username FROM users WHERE Name=" + Sid
-curs.execute(sqlcommand)
+sqlcommand = "SELECT Username FROM users WHERE Name=%s"
+curs.execute(sqlcommand, (Sid,))
 
 results = curs.fetchall()
 
