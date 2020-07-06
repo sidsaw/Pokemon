@@ -352,7 +352,7 @@ curs = conn.cursor()
 
 sqlcommand = "SELECT * FROM users"
 
-results = cur.fetchall()
+results = curs.fetchall()
 
 for row in results:
 	print(row)
