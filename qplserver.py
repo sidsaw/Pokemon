@@ -3,10 +3,16 @@ import json
 import base64
 import re
 import string
+import sqlite3
 app = Flask(__name__)
 
-print("Starting Pokemon Server!")
+class File:
+	filedata = ''
+	fileid = ''
+	alreadyparsed = False
+	dropped = False
 
+print("Starting Pokemon Server!")
 # Listen for post requests
 @app.route('/', methods=['GET', 'POST'])
 def server():
@@ -30,38 +36,7 @@ def server():
 			print("detected files and idsneeded in form data")
 			files = requestdata.get('files')
 			idsneeded = requestdata.get('idsneeded')
-			# decode files to string
-			decodedfiles = []
-			for file in files:
-				replay = base64.b64decode(file).decode("utf-8")
-				# replace non ascii characters
-				printable = set(string.printable)
-				replay = ''.join(filter(lambda x: x in printable, replay))
-				decodedfiles.append(replay)
-				print(replay)
-
-			# Parse files for replayid
-			for d in decodedfiles:
-				# get replayid
-				replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)
-				print(replayid)
-				# error checking if id wasn't found
-				
-
-				# match the replayid
-			# check if replay was already parsed
-			droppedfiles = []
-			alreadyparsed = []
-			# TODO change statement below
-			parsedids = idsneeded
-			# TODO Update database with stats for new files
-			logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) \
-			+ ' ignored replays with fileids: ' + ' '.join(alreadyparsed) \
-			+ ' could not parse: ' + str(len(droppedfiles)) + ' files'
-			data = {
-				'log': logstring
-			}
-			return jsonify(data)
+			return decodeandparse(files, idsneeded)			
 
 		else:
 			print("did not detect fileids, files, idsneeded in form data")
@@ -79,9 +54,63 @@ def server():
 	return jsonify(data)
 
 
-# Get file list
+def decodeandparse(files, idsneeded):
+	# decode files to string
+	decodedfiles = []
+	printable = set(string.printable)
+	for i in range(len(files)):
+		newfile = File()
+		replay = base64.b64decode(files[i]).decode("utf-8")
+		# replace non ascii characters
+		newfile.filedata = ''.join(filter(lambda x: x in printable, replay))
+		newfile.fileid = idsneeded[i]
+		decodedfiles.append(newfile)
 
-# Check database for missing files
+	# Parse files for replayid
+	filestoparse = []
+	for d in decodedfiles:
+		# get replayid
+		if re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata) != None:
+			replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata).group(0)	
+			# Query database to see if this replayid wasn't already parsed
+			if True:
+				# add file to filestoparse
+				filestoparse.append(d)
+			else:
+				# set alreadyparsed flag to true
+				d.alreadyparsed = True
+		else:
+			# Replayid wasn't found
+			d.dropped = True
+		print(replayid)
+
+	# Calculate stats for filestoparse
+	for f in filestoparse:
+		calculatestats(f)
+
+	# calculate stats for log statement
+	parsedids = []
+	alreadyparsed = []
+	droppedfiles = []
+	for d in decodedfiles:
+		if not d.alreadyparsed and not d.dropped:
+			parsedids.append(d.fileid)
+		elif d.alreadyparsed:
+			alreadyparsed.append(d.fileid)
+		elif d.dropped:
+			droppedfiles.append(d)
+	logstring = 'Updated replays with fileids: ' + ' '.join(parsedids) \
+	+ ' ignored replays with fileids: ' + ' '.join(alreadyparsed) \
+	+ ' could not parse: ' + str(len(droppedfiles)) + ' files'
+	data = {
+		'log': logstring
+	}
+	return jsonify(data)
+
+# Calculates stats for a file
+def calculatestats(f):
+	print("put stats code here")
+	# return f in case 
 
 
 if __name__ == "__main__":
