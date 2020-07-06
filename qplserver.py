@@ -19,21 +19,24 @@ def server():
 	conn = connect('/home/ec2-user/Pokemon/pokemon.db')
 	curs = conn.cursor()
 	if request.method == 'POST':
-		print("detected post request")
 		requestdata = request.get_json()
 		# if fileids is in data
 		if requestdata.get('fileids') != None:
-			print("detected fileids in form data")
 			fileids = requestdata.get('fileids')
-			# TODO query database and find which file ids needed
+			# query database and find which file ids needed
+			idsneeded = []
 			for f in fileids:
 				print(type(f))
 				print(f)
-				statement = "SELECT ReplayID FROM replays WHERE FileID=" + 
+				statement = "SELECT ReplayID FROM replays WHERE FileID=?"
+				curs.execute(statement, (f,))
+				result = curs.fetchall()
+				if not result:
+					idsneeded.append(f)
 
 			data = {
 				'log': 'Received post request and fileids',
-				'idsneeded': fileids
+				'idsneeded': idsneeded
 			}
 			return jsonify(data)
 
