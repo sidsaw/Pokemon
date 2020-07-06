@@ -46,7 +46,7 @@ def server():
 			print("detected files and idsneeded in form data")
 			files = requestdata.get('files')
 			idsneeded = requestdata.get('idsneeded')
-			return decodeandparse(files, idsneeded)			
+			return decodeandparse(files, idsneeded, curs)			
 
 		else:
 			print("did not detect fileids, files, idsneeded in form data")
@@ -64,7 +64,7 @@ def server():
 	return jsonify(data)
 
 
-def decodeandparse(files, idsneeded):
+def decodeandparse(files, idsneeded, curs):
 	# decode files to string
 	decodedfiles = []
 	printable = set(string.printable)
@@ -83,7 +83,11 @@ def decodeandparse(files, idsneeded):
 		if re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata) != None:
 			replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', d.filedata).group(0)	
 			# Query database to see if this replayid wasn't already parsed
-			if True:
+			statement = "SELECT FileID FROM replays WHERE ReplayID=?"
+			curs.execute(statement, (replayid,))
+			result = curs.fetchall()
+			# if replayID doesnt exist in sheet
+			if not result:
 				# add file to filestoparse
 				filestoparse.append(d)
 			else:
