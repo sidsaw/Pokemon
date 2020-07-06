@@ -352,7 +352,7 @@ curs = conn.cursor()
 
 Sid = "Sid"
 
-sqlcommand = "SELECT Username FROM users WHERE Name=%s"
+sqlcommand = "SELECT Username FROM users WHERE Name=?"
 curs.execute(sqlcommand, (Sid,))
 
 results = curs.fetchall()
