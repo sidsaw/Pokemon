@@ -22,6 +22,7 @@ def server():
 		requestdata = request.get_json()
 		# if fileids is in data
 		if requestdata.get('fileids') != None:
+			print("detected fileids in form data")
 			fileids = requestdata.get('fileids')
 			# query database and find which file ids needed
 			idsneeded = []
@@ -89,6 +90,7 @@ def decodeandparse(files, idsneeded, curs):
 			# if replayID doesnt exist in sheet
 			if not result:
 				# add file to filestoparse
+				print("adding file to filestoparse")
 				filestoparse.append(d)
 			else:
 				# set alreadyparsed flag to true
@@ -96,11 +98,10 @@ def decodeandparse(files, idsneeded, curs):
 		else:
 			# Replayid wasn't found
 			d.dropped = True
-		print(replayid)
 
 	# Calculate stats for filestoparse
 	for f in filestoparse:
-		calculatestats(f)
+		calculatestats(f, curs)
 
 	# calculate stats for log statement
 	parsedids = []
@@ -122,7 +123,7 @@ def decodeandparse(files, idsneeded, curs):
 	return jsonify(data)
 
 # Calculates stats for a file
-def calculatestats(f):
+def calculatestats(f, curs):
 	print("put stats code here")
 	# return f in case 
 
