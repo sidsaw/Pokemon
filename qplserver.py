@@ -78,7 +78,7 @@ def decodeandparse(files, idsneeded, curs):
 		decodedfiles.append(newfile)
 
 	# Parse files for replayid
-	print(decodedfiles[0])
+	# print(decodedfiles[0])
 	filestoparse = []
 	for d in decodedfiles:
 		# get replayid
