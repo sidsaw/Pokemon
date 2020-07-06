@@ -350,7 +350,7 @@ else:
 conn = connect('/home/ec2-user/Pokemon/pokemon.db')
 curs = conn.cursor()
 
-Sid = 'Sid'
+Sid = "'Sid'"
 
 sqlcommand = "SELECT Username FROM users WHERE Name=" + Sid
 curs.execute(sqlcommand)
