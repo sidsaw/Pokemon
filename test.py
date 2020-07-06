@@ -348,7 +348,7 @@ else:
 
 # Replace username with your own A2 Hosting account username:
 conn = connect('/home/ec2-user/Pokemon/pokemon.db')
-curs = conn.cursor(prepared=True)
+curs = conn.cursor()
 
 Sid = "Sid"
 
