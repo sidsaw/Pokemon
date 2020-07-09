@@ -125,6 +125,7 @@ def decodeandparse(files, idsneeded, curs):
 
 # Calculates stats for a file
 def calculatestats(f, curs):
+	print("TODO add sqlite3 wrapper class")
 	print("put stats code here")
 	# return f in case 
 

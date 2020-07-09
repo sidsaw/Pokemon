@@ -336,40 +336,109 @@ let daily = Math.floor(Date.now()/1000/60/60/24);document.write('<script src="ht
 </script>
 """
 
-printable = set(string.printable)
-replay = ''.join(filter(lambda x: x in printable, replay))
+# logs = ""
 
-if re.search('(?<=gen[0-9]ou-)[0-9]+', replay) != None:
-	print("not none")
+class Pokemon:
+	def __init__(self, ihp):
+		self.name = ""
+		self.nickname = ""
+		self.hpstat = ihp
+		self.remaininghp = 100
+		self.stats = dict()
+		self.stats['kills'] = 0
+		self.stats['deaths'] = 0
+		self.stats['totaldd'] = 0
+		self.stats['directdd'] = 0
+		self.stats['indirectdd'] = 0
+		self.stats['activeturns'] = 0
+		self.stats['switchins'] = 0
+		self.stats['switchouts'] = 0
+		self.stats['misses'] = 0
+		self.stats['crits'] = 0
 
-else:
-	print("None")
+
+class Side:
+	def __init__(self, pname, number, iremaining):
+		# key is hazard name, value is pokemon name, exception is key numspikes
+		self.playername = pname
+		self.playernum = number
+
+		# this is the hazards on the other side, value should be pokemon on THIS side
+		self.hazards = dict()
+		self.hazards['numspikes'] = "0"
+		self.hazards['spikes1'] = ""
+		self.hazards['spikes2'] = ""
+		self.hazards['spikes3'] = ""
+		self.hazards['stealthrocks'] = ""
+		self.hazards['tspikes'] = ""
+		self.hazards['leechseed'] = ""
+
+		# key will be pokemon name, value will be pokemon object
+		self.pokemon = dict()
+		self.remaining = iremaining;
+
+class Game:
+	def __init__(self):
+		# key is nickname, value is pokemon name
+		self.nicknames = dict()
+		
+		# key is pokemon name, value is nickname
+		self.actualnames = dict()
+
+		# key is weather name, value is pokemon name
+		self.weather = dict()
+		self.weather['sandstorm'] = ""
+		self.weather['hail'] = ""
 
 
-# Replace username with your own A2 Hosting account username:
-conn = connect('/home/ec2-user/Pokemon/pokemon.db')
-curs = conn.cursor()
+# get replay id
+replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)
 
-Sid = "Sid"
+#print("parsing replayid: " + replayid)
 
-sqlcommand = "SELECT Username FROM users WHERE Name=?"
-curs.execute(sqlcommand, (Sid,))
+# get player names
+p1name = re.search('(?<=\|player\|p1\|)[^\|]+', replay).group(0)
+p2name = re.search('(?<=\|player\|p2\|)[^\|]+', replay).group(0)
+#print("p1: " + p1name)
+#print("p2: " + p2name)
 
-results = curs.fetchall()
+# get number of pokemon on each side
+p1numpok = int(re.search('(?<=\|teamsize\|p1\|)[0-9]', replay).group(0))
+p2numpok = int(re.search('(?<=\|teamsize\|p2\|)[0-9]', replay).group(0))
+#print("p1: " + str(p1numpok))
+#print("p2: " + str(p2numpok))
 
-print(results)
+# get pokemon on each side
+pattern = re.compile(r'(?<=\|poke\|p1\|)[^\|,]+')
+#for m in re.finditer(pattern, replay):
+	#print(m.group(0))
 
-if not results:
-	print("empty")
+pattern = re.compile(r'(?<=\|poke\|p2\|)[^\|,]+')
+#for m in re.finditer(pattern, replay):
+	#print(m.group(0))
 
-else:
-	print("not empty")
+# get first 2 pokemon
+# |switch|p1a: Espeon|Espeon, F|100\\/100
+# |switch|p2a: Metacute|Metagross|100\\/100
+startp1pok = re.search(r'(?<=\|switch\|p1a: )([^\|]+)\|([^\|,]+)', replay)
+#print(startp1pok.group(1))
+#print(startp1pok.group(2))
 
-print(type(results))
+startp2pok = re.search(r'(?<=\|switch\|p2a: )([^\|]+)\|([^\|,]+)', replay)
+#print(startp2pok.group(1))
+#print(startp2pok.group(2))
 
-# for row in results:
-# 	print(type(row[0]))
-# 	print(row[0])
+# TODO add to active turns
+# TODO add to nicknames and names
+
+# loop through each turn
+# group 1: turn number, group 2 all turn data, group 5 turn, group 6 win
+pattern = re.compile(r'(?<=\|turn\|)([0-9]+)((.|\n)*?)((?=\|(turn)\|)|(?=\|(win)\|))')
+for m in re.finditer(pattern, replay):
+	print("next match")
+	print(m.group(2))
+	
+
 
 
 
