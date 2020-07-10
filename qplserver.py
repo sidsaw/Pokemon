@@ -75,6 +75,7 @@ def decodeandparse(files, idsneeded, curs):
 		# replace non ascii characters
 		newfile.filedata = ''.join(filter(lambda x: x in printable, replay))
 		newfile.fileid = idsneeded[i]
+		print(newfile.filedata)
 		decodedfiles.append(newfile)
 
 	# Parse files for replayid

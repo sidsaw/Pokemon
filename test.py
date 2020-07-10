@@ -339,14 +339,17 @@ let daily = Math.floor(Date.now()/1000/60/60/24);document.write('<script src="ht
 # logs = ""
 
 class Pokemon:
-	def __init__(self, ihp):
+	def __init__(self):
 		self.name = ""
-		self.nickname = ""
-		self.hpstat = ihp
+		self.hpstat = 0
 		self.remaininghp = 100
+		self.poisoned = ""
+		self.burned = ""
+		self.leechseed = ""
+		self.activatedmove = ""
+		self.alive = True
 		self.stats = dict()
 		self.stats['kills'] = 0
-		self.stats['deaths'] = 0
 		self.stats['totaldd'] = 0
 		self.stats['directdd'] = 0
 		self.stats['indirectdd'] = 0
@@ -358,12 +361,12 @@ class Pokemon:
 
 
 class Side:
-	def __init__(self, pname, number, iremaining):
-		# key is hazard name, value is pokemon name, exception is key numspikes
-		self.playername = pname
-		self.playernum = number
-
+	def __init__(self):
+		
+		self.playername = ""
+		self.remaining = ""
 		# this is the hazards on the other side, value should be pokemon on THIS side
+		# key is hazard name, value is pokemon nickname, exception is key numspikes
 		self.hazards = dict()
 		self.hazards['numspikes'] = "0"
 		self.hazards['spikes1'] = ""
@@ -371,72 +374,110 @@ class Side:
 		self.hazards['spikes3'] = ""
 		self.hazards['stealthrocks'] = ""
 		self.hazards['tspikes'] = ""
-		self.hazards['leechseed'] = ""
 
-		# key will be pokemon name, value will be pokemon object
+		# key is be nickname, value is be pokemon object
 		self.pokemon = dict()
-		self.remaining = iremaining;
+		
 
 class Game:
 	def __init__(self):
-		# key is nickname, value is pokemon name
-		self.nicknames = dict()
+		self.replayid = ""
+		# key is nickname and side, value 
+		self.getactualname = dict()
 		
-		# key is pokemon name, value is nickname
-		self.actualnames = dict()
+		# key is pokemon name and side, value is nickname
+		self.getnickname = dict()
 
 		# key is weather name, value is pokemon name
 		self.weather = dict()
 		self.weather['sandstorm'] = ""
 		self.weather['hail'] = ""
 
+		# key is int [1, 2], value is side object
+		self.sides = dict()
+		self.sides['1'] = Side()
+		self.sides['2'] = Side()
 
+game = Game()
 # get replay id
 replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)
-
-#print("parsing replayid: " + replayid)
+game.replayid = replayid
 
 # get player names
 p1name = re.search('(?<=\|player\|p1\|)[^\|]+', replay).group(0)
+game.sides['1'].playername = p1name
 p2name = re.search('(?<=\|player\|p2\|)[^\|]+', replay).group(0)
-#print("p1: " + p1name)
-#print("p2: " + p2name)
+game.sides['2'].playername = p2name
 
 # get number of pokemon on each side
-p1numpok = int(re.search('(?<=\|teamsize\|p1\|)[0-9]', replay).group(0))
-p2numpok = int(re.search('(?<=\|teamsize\|p2\|)[0-9]', replay).group(0))
-#print("p1: " + str(p1numpok))
-#print("p2: " + str(p2numpok))
+# p1numpok = int(re.search('(?<=\|teamsize\|p1\|)[0-9]', replay).group(0))
+# game.sides['1'].remaining = p1numpok
+# p2numpok = int(re.search('(?<=\|teamsize\|p2\|)[0-9]', replay).group(0))
+# game.sides['2'].remaining = p2numpok
 
 # get pokemon on each side
+p1pok = []
 pattern = re.compile(r'(?<=\|poke\|p1\|)[^\|,]+')
-#for m in re.finditer(pattern, replay):
-	#print(m.group(0))
+for m in re.finditer(pattern, replay):
+	p1pok.append(m.group(0))
 
+p2pok = []
 pattern = re.compile(r'(?<=\|poke\|p2\|)[^\|,]+')
-#for m in re.finditer(pattern, replay):
-	#print(m.group(0))
+for m in re.finditer(pattern, replay):
+	p2pok.append(m.group(0))
+
+# parse whole replay for pokemon and their nicknames
+# group 1 is playernum, group 2 is nickname, group 3 is actual pokemon name
+pattern = re.compile(r'(?<=\|switch\|p([0-9])a: )([^\|]+)\|([^\|,]+)')
+for m in re.finditer(pattern, replay):
+	game.sides[m.group(1)].pokemon[m.group(2)] = Pokemon()
+	# TODO query db for pokemon HP stat
+	game.sides[m.group(1)].pokemon[m.group(2)].name = m.group(3)
 
 # get first 2 pokemon
-# |switch|p1a: Espeon|Espeon, F|100\\/100
-# |switch|p2a: Metacute|Metagross|100\\/100
-startp1pok = re.search(r'(?<=\|switch\|p1a: )([^\|]+)\|([^\|,]+)', replay)
-#print(startp1pok.group(1))
-#print(startp1pok.group(2))
-
-startp2pok = re.search(r'(?<=\|switch\|p2a: )([^\|]+)\|([^\|,]+)', replay)
-#print(startp2pok.group(1))
-#print(startp2pok.group(2))
+startp1pok = re.search(r'(?<=\|switch\|p1a: )([^\|]+)\|([^\|,]+)', replay).group(0)
+startp2pok = re.search(r'(?<=\|switch\|p2a: )([^\|]+)\|([^\|,]+)', replay).group(0)
 
 # TODO add to active turns
 # TODO add to nicknames and names
+pok1 = startp1pok
+pok2 = startp2pok
 
-# loop through each turn
-# group 1: turn number, group 2 all turn data, group 5 turn, group 6 win
-pattern = re.compile(r'(?<=\|turn\|)([0-9]+)((.|\n)*?)((?=\|(turn)\|)|(?=\|(win)\|))')
+# group 1: turn number, group 2 all turn data
+pattern = re.compile(r'(?<=\|turn\|)([0-9]+)((.|\n)*?)((?=\|turn\|)|(?=\|win\|))')
 for m in re.finditer(pattern, replay):
-	print("next match")
-	print(m.group(2))
+	print("parsing turn " + m.group(1))
+	turndata = m.group(2)
+	for line in turndata.split('\n'):
+		# if switch
+		if re.search(r'(?<=\|switch\|p([0-9])a: )([^\|]+)', line) != None:
+			m = re.search(r'(?<=\|switch\|p([0-9])a: )([^\|]+)', line)
+			# group 1 is player
+			print(m.group(1))
+			# group 2 is nickname switching in
+			print(m.group(2))
+		# if damage
+		if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)', line) != None:
+
+		# if leech seed or other pokemon specific hazard starts
+		# if other hazards start
+		# if weather starts
+		# if weather ends
+		# if poison or burn starts
+		# if leech seed ends
+		# if other hazards end
+		# if poison or burn ends
+		# if crit
+		# if miss
+		# if faint, clear pok1 or pok2
+		# increment active turns for pokemon that are alive
+
+# increment appearance value in db for all pokemon in p1pok and p2pok
+
+# get actual player names, calculate score and return stats
+
+
+
 	
 
 
