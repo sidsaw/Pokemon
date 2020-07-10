@@ -453,23 +453,82 @@ for m in re.finditer(pattern, replay):
 		if re.search(r'(?<=\|switch\|p([0-9])a: )([^\|]+)', line) != None:
 			m = re.search(r'(?<=\|switch\|p([0-9])a: )([^\|]+)', line)
 			# group 1 is player
-			print(m.group(1))
+			#print(m.group(1))
 			# group 2 is nickname switching in
-			print(m.group(2))
-		# if damage
-		if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)', line) != None:
+			#print(m.group(2))
+			# change pok1/pok2
 
-		# if leech seed or other pokemon specific hazard starts
-		# if other hazards start
-		# if weather starts
-		# if weather ends
-		# if poison or burn starts
+		# if non dying damage
+		# if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|([0-9]+)\\/([0-9]+)', line) != None:
+		# 	m = re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|([0-9]+)\\/([0-9]+)', line)
+		# 	print("matched damage")
+
+		# if leech seed starts
 		# if leech seed ends
-		# if other hazards end
-		# if poison or burn ends
+
+		# if other pokemon specific hazard starts
+		# if other pokemon specific hazard ends
+
+		# if hazards start
+		if re.search(r'(?<=-sidestart\|p([0-9]):)', line) != None:
+			m = re.search(r'(?<=-sidestart\|p([0-9]):)', line)
+			# print("matched hazards")
+			# # group 1 is the player num the hazards are now on
+			# print(m.group(1))
+			# # TODO need to match to type of hazard
+
+		# if hazards end
+		if re.search(r'(?<=-sideend\|p([0-9]):)', line) != None:
+			m = re.search(r'(?<=-sideend\|p([0-9]):)', line)
+			# TODO need to match to type of hazard
+			# group 1 is the player num the hazards are cleared from
+
+		# if weather starts (sandstorm or hail)
+
+		# if weather ends
+		# TODO check to see if works
+		if re.search(r'-weather\|none', line) != None:
+			# remove this line
+			m = re.search(r'-weather\|none', line)
+
+		# if poison or burn or tox starts
+		# TODO check to see if works
+		if re.search(r'(?<=-status\|p([0-9]): )([^\|]+)', line) != None:
+			# check for tox or burn or psn
+			m = re.search(r'(?<=-status\|p([0-9]): )([^\|]+)', line)
+
+		# if poison or burn or tox ends
+		# TODO check to see if works
+		if re.search(r'(?<=-curestatus\|p([0-9]): )([^\|]+)', line) != None:
+			# check for tox or burn or psn
+			m = re.search(r'(?<=-curestatus\|p([0-9]): )([^\|]+)', line)
+
 		# if crit
+		if re.search(r'(?<=-crit\|p([0-9])a: )(.*)', line) != None:
+			m = re.search(r'(?<=-crit\|p([0-9])a: )(.*)', line)
+			# print("matched crit")
+			# # group 1 is player num
+			# print(m.group(1))
+			# # group 2 is nickname that was HIT with the crit
+			# print(m.group(2))
+
 		# if miss
-		# if faint, clear pok1 or pok2
+		if re.search(r'(?<=-miss\|p([0-9])a: )([^\|]+)', line) != None:
+			m = re.search(r'(?<=-miss\|p([0-9])a: )([^\|]+)', line)
+			# print("matched miss")
+			# # group 1 is player num
+			# print(m.group(1))
+			# # group 2 is nickname that missed
+			# print(m.group(2))
+		
+		# if dying damage (faint), clear pok1 or pok2
+		if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line) != None:
+			m = re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line)
+			print("matched dying damage")
+			print(m.group(1))
+			print(m.group(2))
+			print(m.group(3))
+
 		# increment active turns for pokemon that are alive
 
 # increment appearance value in db for all pokemon in p1pok and p2pok
