@@ -464,6 +464,8 @@ for m in re.finditer(pattern, replay):
 		# 	print("matched damage")
 
 		# if leech seed starts
+		if re.search(r'', line) != None:
+			m = re.search(r'', line)
 		# if leech seed ends
 
 		# if other pokemon specific hazard starts
@@ -525,9 +527,15 @@ for m in re.finditer(pattern, replay):
 		if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line) != None:
 			m = re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line)
 			print("matched dying damage")
+			# group 1 is player num
 			print(m.group(1))
+			# group 2 is pokemon nickname
 			print(m.group(2))
+			# group 3 is additional data
+			# look for tox, brn, poison, leech seed, sandstorm, hail, spikes, rocks, 
 			print(m.group(3))
+
+		# TODO destiny bond
 
 		# increment active turns for pokemon that are alive
 
