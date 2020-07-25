@@ -1,4 +1,6 @@
+import re
 def switch(m, game):
+	game.lastevent = "switch"
 	playernum = m.group(1)
 	switch_in = m.group(2)
 	switch_out = game.sides[playernum].activepok
@@ -13,6 +15,8 @@ def switch(m, game):
 	game.sides[playernum].pokemon[switch_out].stats['switchouts'] += 1
 	# add 1 to switch in for switch_in pokemon
 	game.sides[playernum].pokemon[switch_in].stats['switchins'] += 1
+	# set switch flag to true
+	game.sides[playernum].switch = True
 	# change active pokemon name
 	game.sides[playernum].activepok = switch_in
 
@@ -41,7 +45,6 @@ def crit(m, game):
 		game.sides['1'].pokemon[critpok].stats['crits'] += 1
 
 def ls_start(m, game):
-	print("in leech seed start")
 	# group 1 is player number
 	playernum = m.group(1)
 	# group 2 is pokemon nickname
@@ -58,7 +61,6 @@ def ls_start(m, game):
 		game.sides['2'].pokemon[startpok].leechseed = ls_starter
 
 def ls_end(m, game):
-	print("in leech seed end")
 	# group 1 is player number
 	playernum = m.group(1)
 	# group 2 is pokemon nickname
@@ -66,10 +68,59 @@ def ls_end(m, game):
 	game.sides[playernum].pokemon[endpok].leechseed = ""
 
 def status_start(m, game):
-	print("lol")
+	# player num
+	playernum = m.group(1)
+	othernum = ""
+	if playernum == '1':
+		othernum = '2'
+	else:
+		othernum = '1'
+	# nickname of pokemon that is statused
+	statuspok = m.group(2)
+	# status condition
+	status = m.group(3)
+	# additional status info
+	extrainfo = m.group(4)
+	
+	# if status condition isn't burn/psn/tox, ignore
+	if status != 'psn' and status != 'brn' and status != 'tox':
+		return
+	# if from item
+	if extrainfo != None and extrainfo.find('item') != -1:
+		#print("found item status")
+		# assign statuser to itself
+		if status == 'brn':
+			game.sides[playernum].pokemon[statuspok].burned = "self"
+		else:
+			game.sides[playernum].pokemon[statuspok].poisoned = "self"
+		return
+	# if from ability in the extra info, assign statuser as other active pokemon
+	if extrainfo != None and extrainfo.find('ability') != -1:
+		#print("found ability status")
+		# get other active pokemon
+		statuser = game.sides[othernum].activepok
+		# assign statuser to otherpok
+		if status == 'brn':
+			game.sides[playernum].pokemon[statuspok].burned = statuser
+		else:
+			game.sides[playernum].pokemon[statuspok].poisoned = statuser
+	# if brn, assign to other active pokemon
+	if status == 'brn':
+		# get other active pokemon
+		statuser = game.sides[othernum].activepok
+		game.sides[playernum].pokemon[statuspok].burned = statuser
+	# if poison, check if last event was switch (then cause was hazards)
+	if status == 'tox' or status == 'psn':
+		if game.lastevent == 'switch':
+			assert(game.sides[playernum].hazards['tspikes'] != ''), "Detected status and switch, but no tspiker"
+			tspiker = game.sides[playernum].hazards['tspikes']
+			game.sides[playernum].pokemon[statuspok].poisoned = tspiker
+		else:
+			# get other active pokemon
+			statuser = game.sides[othernum].activepok
+			game.sides[playernum].pokemon[statuspok].poisoned = statuser
 
 def cure_status(m, game):
-	print("in cure_status")
 	# group 1 is player number
 	# group 3 is the status condition
 	playernum = m.group(1)
@@ -77,6 +128,112 @@ def cure_status(m, game):
 	# clear all statuses for the pokemon
 	game.sides[playernum].pokemon[statusedpok].poisoned = ""
 	game.sides[playernum].pokemon[statusedpok].burned = ""
+
+def move(m, game):
+	game.lastevent = "move"
+	# group 1 is player number
+	playernum = m.group(1)
+	# group 2 is pok nickname
+	movepok = m.group(2)
+	# group 3 is move
+	themove = m.group(3)
+	# set move
+	game.sides[playernum].move = themove
+	game.sides[playernum].usedmove = True
+
+def hazard_start(m, game):
+	#print("hazard started")
+	# group 1 is the player num the hazards are now on
+	playernum = m.group(1)
+	move = m.group(3)
+	hazardstarter = ""
+	# get other active pokemon that used hazard move
+	if playernum == '1':
+		hazardstarter = game.sides['2'].activepok
+	else:
+		hazardstarter = game.sides['1'].activepok
+	# set the name of the pokemon that used the hazard move in the hazards dictionary
+	# of the side that the hazards are on
+	if move == 'Stealth Rock':
+		game.sides[playernum].hazards['stealthrocks'] = hazardstarter
+	elif move == 'Toxic Spikes':
+		game.sides[playernum].hazards['tspikes'] = hazardstarter
+	else:
+		# increment number of spikes on the side
+		game.sides[playernum].hazards['numspikes'] += 1
+		spikenum = game.sides[playernum].hazards['numspikes']
+		# set spiker
+		spikekey = 'spikes' + str(spikenum)
+		game.sides[playernum].hazards[spikekey] = hazardstarter
+
+def hazard_end(m, game):
+	#print("hazard ended")
+	playernum = m.group(1)
+	move = m.group(3)
+	if move == 'Stealth Rock':
+		game.sides[playernum].hazards['stealthrocks'] = ''
+	elif move == 'Toxic Spikes':
+		game.sides[playernum].hazards['tspikes'] = ''
+	else:
+		# clear all spikes and numspikes
+		game.sides[playernum].hazards['spikes1'] = ''
+		game.sides[playernum].hazards['spikes2'] = ''
+		game.sides[playernum].hazards['spikes3'] = ''
+		game.sides[playernum].hazards['numspikes'] = 0
+
+def weather(m, game):
+	typeweather = m.group(1)
+	moveflag = m.group(2)
+	upkeep = m.group(3)
+	abilityinfo = m.group(4)
+	# if upkeep, ignore
+	if upkeep == '[upkeep]':
+		return
+	# clear weather
+	game.weather['sandstorm'] = ""
+	game.weather['hail'] = ""
+	game.weather['startedby'] = ""
+	# if none, weather ended so return
+	if typeweather == 'none':
+		return
+	# if weather was started b/c ability
+	if abilityinfo != None:
+		# match side and pokemon name
+		a = re.search(r'p([0-9])a: (.*)', abilityinfo)
+		side = a.group(1)
+		pokname = a.group(2)
+		if typeweather == 'Hail':
+			game.weather['hail'] = pokname
+			game.weather['startedby'] = side
+		if typeweather == 'Sandstorm':
+			game.weather['sandstorm'] = pokname
+			game.weather['startedby'] = side
+		return
+	# if group 2 is none, move was used
+	if moveflag == None:
+		# don't record if its Sandstorm or Hail
+		if typeweather == 'RainDance' or typeweather == 'SunnyDay':
+			return
+		if typeweather == 'Sandstorm':
+			# check which side used sandstorm
+			if game.sides['1'].move == "Sandstorm":
+				game.weather['sandstorm'] = game.sides['1'].activepok
+				game.weather['startedby'] = '1'
+			else:
+				game.weather['sandstorm'] = game.sides['2'].activepok
+				game.weather['startedby'] = '2'
+		if typeweather == 'Hail':
+			# check which side used sandstorm
+			if game.sides['1'].move == "Hail":
+				game.weather['hail'] = game.sides['1'].activepok
+				game.weather['startedby'] = '1'
+			else:
+				game.weather['hail'] = game.sides['2'].activepok
+				game.weather['startedby'] = '2'
+
+
+
+
 
 
 
