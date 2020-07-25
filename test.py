@@ -53,21 +53,21 @@ replay = """
 |switch|p2a: Tyranitar|Tyranitar, M|100\\/100
 |-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
 |turn|1
+
+
+|
+|t:|1595619477
+|move|p1a: Mandibuzz|Confide|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spa|1
+|move|p2a: Tyranitar|Curse|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spe|1
+|-boost|p2a: Tyranitar|atk|1
+|-boost|p2a: Tyranitar|def|1
+|
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|2
 """
-
-# |
-# |t:|1595619477
-# |move|p1a: Mandibuzz|Confide|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spa|1
-# |move|p2a: Tyranitar|Curse|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spe|1
-# |-boost|p2a: Tyranitar|atk|1
-# |-boost|p2a: Tyranitar|def|1
-# |
-# |-weather|Sandstorm|[upkeep]
-# |upkeep
-# |turn|2
-
 
 # |
 # |t:|1595619882
@@ -123,31 +123,31 @@ replay = """
 # |-weather|none
 # |upkeep
 # |turn|6
-replay += """
-
-|
-|t:|1595619900
-|switch|p2a: Abomasnow|Abomasnow, F|100\\/100
-|-weather|Hail|[from] ability: Snow Warning|[of] p2a: Abomasnow
-|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-|-unboost|p2a: Abomasnow|spa|1
-|
-|-weather|Hail|[upkeep]
-|upkeep
-|turn|7
 
 
-|
-|t:|1595619904
-|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-|-unboost|p2a: Abomasnow|spa|1
-|move|p2a: Abomasnow|Sleep Talk||[still]
-|-fail|p2a: Abomasnow
-|
-|-weather|Hail|[upkeep]
-|upkeep
-|turn|8
-"""
+# |
+# |t:|1595619900
+# |switch|p2a: Abomasnow|Abomasnow, F|100\\/100
+# |-weather|Hail|[from] ability: Snow Warning|[of] p2a: Abomasnow
+# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+# |-unboost|p2a: Abomasnow|spa|1
+# |
+# |-weather|Hail|[upkeep]
+# |upkeep
+# |turn|7
+
+
+# |
+# |t:|1595619904
+# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+# |-unboost|p2a: Abomasnow|spa|1
+# |move|p2a: Abomasnow|Sleep Talk||[still]
+# |-fail|p2a: Abomasnow
+# |
+# |-weather|Hail|[upkeep]
+# |upkeep
+# |turn|8
+
 
 # |
 # |t:|1595619908
@@ -497,14 +497,34 @@ for m in re.finditer(pattern, replay):
 	# TODO query db for pokemon HP stat and set hp stat for pokemon
 	game.sides[m.group(1)].pokemon[m.group(2)].name = m.group(3)
 
-# get first 2 pokemon
-startp1pok = re.search(r'(?<=\|switch\|p1a: )([^\|]+)\|([^\|,]+)', replay).group(1)
-startp2pok = re.search(r'(?<=\|switch\|p2a: )([^\|]+)\|([^\|,]+)', replay).group(1)
+# get text before turn 1, get first 2 pokemon and possible weathers
+preturn1data = re.search(r'((.|\n)*?)(?=\|turn\|1)', replay).group(0)
 
-# TODO check for weather that starts before turn 1 starts
+# get first 2 pokemon
+startp1pok = re.search(r'(?<=\|switch\|p1a: )([^\|]+)\|([^\|,]+)', preturn1data).group(1)
+startp2pok = re.search(r'(?<=\|switch\|p2a: )([^\|]+)\|([^\|,]+)', preturn1data).group(1)
 
 game.sides['1'].activepok = startp1pok
 game.sides['2'].activepok = startp2pok
+
+startweather = re.compile(r'(?<=-weather)\|([^\|]+)\|([^\|]+)\|\[of\] p([0-9])a: (.*)')
+for m in re.finditer(startweather, preturn1data):
+	print('found preturn1 weather match')
+	# clear weather
+	game.weather['sandstorm'] = ""
+	game.weather['hail'] = ""
+	game.weather['startedby'] = ""
+	typeweather = m.group(1)
+	side = m.group(3)
+	pokname = m.group(4)
+	# ignore if not Hail or Sandstorm
+	if typeweather == 'RainDance' or typeweather == 'SunnyDay':
+		continue
+	if typeweather == 'Sandstorm':
+		game.weather['sandstorm'] = pokname
+	if typeweather == 'Hail':
+		game.weather['hail'] = pokname
+	game.weather['startedby'] = side
 
 # group 1: turn number, group 2 all turn data
 pattern = re.compile(r'(?<=\|turn\|)([0-9]+)((.|\n)*?)((?=\|turn\|)|(?=\|win\|))')
@@ -611,11 +631,10 @@ for m in re.finditer(pattern, replay):
 		game.sides['2'].switch = False
 
 
-
 # increment appearance value in db for all pokemon in p1pok and p2pok
 
 # get actual player names, calculate score and return stats
-
+db_print_weather(game)
 
 
 

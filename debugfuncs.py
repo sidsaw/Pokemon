@@ -106,7 +106,22 @@ def db_print_hazards(game):
 	if ts2 != '':
 		print("toxic spikes: " + ts2)
 
-
+def db_print_weather(game):
+	print('printing game weather')
+	if game.weather['hail'] != '':
+		pok = game.weather['hail']
+		side = game.weather['startedby']
+		print('Weather: Hail')
+		print('Started by: ' + pok)
+		print('Side: ' + side)
+	elif game.weather['sandstorm'] != '':
+		pok = game.weather['sandstorm']
+		side = game.weather['startedby']
+		print('Weather: Sandstorm')
+		print('Started by: ' + pok)
+		print('Side: ' + side)
+	else:
+		print('No weather')
 
 
 

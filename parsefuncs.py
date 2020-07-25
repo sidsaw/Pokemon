@@ -183,7 +183,6 @@ def hazard_end(m, game):
 
 def weather(m, game):
 	typeweather = m.group(1)
-	moveflag = m.group(2)
 	upkeep = m.group(3)
 	abilityinfo = m.group(4)
 	# if upkeep, ignore
@@ -196,8 +195,8 @@ def weather(m, game):
 	# if none, weather ended so return
 	if typeweather == 'none':
 		return
-	# if weather was started b/c ability
-	if abilityinfo != None:
+	# if last even was switch, weather was started from ability
+	if game.lastevent == 'switch':
 		# match side and pokemon name
 		a = re.search(r'p([0-9])a: (.*)', abilityinfo)
 		side = a.group(1)
@@ -208,10 +207,8 @@ def weather(m, game):
 		if typeweather == 'Sandstorm':
 			game.weather['sandstorm'] = pokname
 			game.weather['startedby'] = side
-		return
-	# if group 2 is none, move was used
-	if moveflag == None:
-		# don't record if its Sandstorm or Hail
+	if game.lastevent == 'move':
+		# don't record if its not Sandstorm or Hail
 		if typeweather == 'RainDance' or typeweather == 'SunnyDay':
 			return
 		if typeweather == 'Sandstorm':
@@ -230,8 +227,7 @@ def weather(m, game):
 			else:
 				game.weather['hail'] = game.sides['2'].activepok
 				game.weather['startedby'] = '2'
-
-
+	
 
 
 
