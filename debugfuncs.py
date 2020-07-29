@@ -1,3 +1,4 @@
+import re
 def db_print_switches(game):
 	for key in game.sides['1'].pokemon:
 		name = game.sides['1'].pokemon[key].name
@@ -123,12 +124,59 @@ def db_print_weather(game):
 	else:
 		print('No weather')
 
-
-
-
-
-
-
+def db_test_damage_regex():
+	print('testing damage regex')
+	allexs = [
+		'|-damage|p1a: Registeel|297\\/301',
+		'|-damage|p1a: Registeel|260\\/301|[from] move: Bind|[partiallytrapped]',
+		'|-damage|p1a: Registeel|223\\/301 brn|[from] brn',
+		'|-damage|p2a: m|75\\/100',
+		'|-damage|p2a: f|88\\/100|[from] item: Black Sludge',
+		'|-damage|p1a: Registeel|35\\/301 brn',
+		'|-damage|p1a: Registeel|0 fnt|[from] brn',
+		'|-damage|p1a: Regigigas|316\\/361|[from] Spikes',
+		'|-damage|p2a: f|57\\/100',
+		'|-damage|p1a: Regigigas|271\\/361|[from] ability: Iron Barbs|[of] p2a: f',
+		'|-damage|p1a: Regigigas|226\\/361|[from] Leech Seed|[of] p2a: f',
+		'|-damage|p1a: Regigigas|187\\/361',
+		'|-damage|p1a: Regigigas|0 fnt',
+		'|-damage|p1a: Regirock|246\\/301|[from] Hail',
+		'|-damage|p2a: abo|99\\/100|[from] Recoil',
+		'|-damage|p1a: Regirock|102\\/301|[from] Curse',
+		'|-damage|p2a: g|45\\/100',
+		'|-damage|p1a: Regirock|81\\/301|[from] confusion',
+		'|-damage|p1a: Regirock|0 fnt|[from] confusion'
+	]
+	testing = [
+		'|-damage|p1a: Registeel|297\\/301',
+		'|-damage|p1a: Registeel|260\\/301|[from] move: Bind|[partiallytrapped]',
+		'|-damage|p1a: Registeel|223\\/301 brn|[from] brn',
+		'|-damage|p2a: m|75\\/100',
+		'|-damage|p2a: f|88\\/100|[from] item: Black Sludge',
+		'|-damage|p1a: Registeel|35\\/301 brn',
+		'|-damage|p1a: Registeel|0 fnt|[from] brn',
+		'|-damage|p1a: Regigigas|316\\/361|[from] Spikes',
+		'|-damage|p2a: f|57\\/100',
+		'|-damage|p1a: Regigigas|271\\/361|[from] ability: Iron Barbs|[of] p2a: f',
+		'|-damage|p1a: Regigigas|226\\/361|[from] Leech Seed|[of] p2a: f',
+		'|-damage|p1a: Regigigas|187\\/361',
+		'|-damage|p1a: Regigigas|0 fnt',
+		'|-damage|p1a: Regirock|246\\/301|[from] Hail',
+		'|-damage|p2a: abo|99\\/100|[from] Recoil',
+		'|-damage|p1a: Regirock|102\\/301|[from] Curse',
+		'|-damage|p2a: g|45\\/100',
+		'|-damage|p1a: Regirock|81\\/301|[from] confusion',
+		'|-damage|p1a: Regirock|0 fnt|[from] confusion'
+	]
+	for line in testing:
+		m = re.search(r'(?<=-damage\|)p([0-9])a: ([^\|]+)\|([^\|]+)\|?([^\|]+)?\|?([^\|]+)?', line)
+		print("parsing: " + line)
+		print(m.group(1))
+		print(m.group(2))
+		print(m.group(3))
+		print(m.group(4))
+		print(m.group(5))
+		print('')
 
 
 

@@ -228,8 +228,14 @@ def weather(m, game):
 				game.weather['hail'] = game.sides['2'].activepok
 				game.weather['startedby'] = '2'
 	
-
-
+# TODO remember that damage from status can come due to the pokemon itself, so "self" might be statuser
+# TODO remember damagedpok's ability might cause pok to take damage (ex: Dry Skin in Sun)
+def damage(m, game):
+	playernum = m.group(1)
+	damagedpok = m.group(2)
+	hpinfo = m.group(3)
+	frominfo = m.group(4)
+	ofinfo = m.group(5)
 
 
 

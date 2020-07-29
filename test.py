@@ -46,6 +46,7 @@ replay = """
 |teampreview
 
 
+
 |
 |t:|1595619472
 |start
@@ -53,7 +54,6 @@ replay = """
 |switch|p2a: Tyranitar|Tyranitar, M|100\\/100
 |-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
 |turn|1
-
 
 |
 |t:|1595619477
@@ -67,324 +67,326 @@ replay = """
 |-weather|Sandstorm|[upkeep]
 |upkeep
 |turn|2
+
+
+|
+|t:|1595619882
+|move|p1a: Mandibuzz|Confide|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spa|1
+|move|p2a: Tyranitar|Curse|p2a: Tyranitarp
+|-unboost|p2a: Tyranitar|spe|1
+|-boost|p2a: Tyranitar|atk|1
+|-boost|p2a: Tyranitar|def|1
+|
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|3
+
+
+|
+|t:|1595619885
+|move|p1a: Mandibuzz|Confide|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spa|1
+|move|p2a: Tyranitar|Curse|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spe|1
+|-boost|p2a: Tyranitar|atk|1
+|-boost|p2a: Tyranitar|def|1
+|
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|4
+
+
+|
+|t:|1595619889
+|move|p1a: Mandibuzz|Confide|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spa|1
+|move|p2a: Tyranitar|Curse|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spe|1
+|-boost|p2a: Tyranitar|atk|1
+|-boost|p2a: Tyranitar|def|1
+|
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|5
+
+
+|
+|t:|1595619893
+|move|p1a: Mandibuzz|Confide|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spa|1
+|move|p2a: Tyranitar|Curse|p2a: Tyranitar
+|-unboost|p2a: Tyranitar|spe|1
+|-boost|p2a: Tyranitar|atk|1
+|-boost|p2a: Tyranitar|def|1
+|
+|-weather|none
+|upkeep
+|turn|6
+
+
+|
+|t:|1595619900
+|switch|p2a: Abomasnow|Abomasnow, F|100\\/100
+|-weather|Hail|[from] ability: Snow Warning|[of] p2a: Abomasnow
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|
+|-weather|Hail|[upkeep]
+|upkeep
+|turn|7
+
+
+|
+|t:|1595619904
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|Hail|[upkeep]
+|upkeep
+|turn|8
+
+
+|
+|t:|1595619908
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|Hail|[upkeep]
+|upkeep
+|turn|9
+
+
+|
+|t:|1595619978
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|Hail|[upkeep]
+|upkeep
+|turn|10
+
+
+|
+|t:|1595619982
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|none
+|upkeep
+|turn|11
+
+
+|
+|t:|1595619991
+|move|p1a: Mandibuzz|Rain Dance|p1a: Mandibuzz
+|-weather|RainDance
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|12
+
+
+|
+|t:|1595620005
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|1
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|13
+
+
+|
+|t:|1595620010
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|14
+
+
+|
+|t:|1595620013
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|15
+
+
+|
+|t:|1595620017
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|none
+|upkeep
+|turn|16
+
+
+|
+|t:|1595620021
+|move|p1a: Mandibuzz|Sunny Day|p1a: Mandibuzz
+|-weather|SunnyDay
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|17
+
+
+|
+|t:|1595620026
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|18
+
+
+|
+|t:|1595620030
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|19
+
+
+|
+|t:|1595620034
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|20
+
+
+|
+|t:|1595620039
+|move|p1a: Mandibuzz|Confide|p2a: Abomasnow
+|-unboost|p2a: Abomasnow|spa|0
+|move|p2a: Abomasnow|Sleep Talk||[still]
+|-fail|p2a: Abomasnow
+|
+|-weather|none
+|upkeep
+|turn|21
+
+
+|
+|t:|1595620055
+|switch|p2a: Mew|Mew|100\\/100
+|move|p1a: Mandibuzz|Confide|p2a: Mew
+|-unboost|p2a: Mew|spa|1
+|
+|upkeep
+|turn|22
+
+
+|
+|t:|1595620074
+|switch|p1a: Mew|Mew|365\\/365
+|-activate|p2a: Mew|move: Struggle
+|move|p2a: Mew|Struggle|p1a: Mew
+|-damage|p1a: Mew|329\\/365
+|-damage|p2a: Mew|75\\/100|[from] recoil
+|
+|upkeep
+|turn|23
+
+
+|
+|t:|1595620171
+|-activate|p2a: Mew|move: Struggle
+|move|p2a: Mew|Struggle|p1a: Mew
+|-damage|p1a: Mew|296\\/365
+|-damage|p2a: Mew|50\\/100|[from] recoil
+|move|p1a: Mew|Sandstorm|p1a: Mew
+|-weather|Sandstorm
+|
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Mew|44\\/100|[from] Sandstorm
+|-damage|p1a: Mew|274\\/365|[from] Sandstorm
+|upkeep
+|turn|24
+
+
+|
+|t:|1595620180
+|move|p1a: Mew|Hail|p1a: Mew
+|-weather|Hail
+|-activate|p2a: Mew|move: Struggle
+|move|p2a: Mew|Struggle|p1a: Mew
+|-damage|p1a: Mew|241\\/365
+|-damage|p2a: Mew|19\\/100|[from] recoil
+|
+|-weather|Hail|[upkeep]
+|-damage|p2a: Mew|13\\/100|[from] Hail
+|-damage|p1a: Mew|219\\/365|[from] Hail
+|upkeep
+|turn|25
+
+
+|
+|t:|1595620189
+|-activate|p2a: Mew|move: Struggle
+|move|p2a: Mew|Struggle|p1a: Mew
+|-damage|p1a: Mew|182\\/365
+|-damage|p2a: Mew|0 fnt|[from] recoil
+|faint|p2a: Mew
+|move|p1a: Mew|Sunny Day|p1a: Mew
+|-weather|SunnyDay
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+
+
+|
+|t:|1595620201
+|switch|p2a: Politoed|Politoed, M|100\\/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Politoed
+|turn|26
+
+
+|-message|notsid69420 forfeited.
+
+
+|
+|win|nottsid69420
 """
 
-# |
-# |t:|1595619882
-# |move|p1a: Mandibuzz|Confide|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spa|1
-# |move|p2a: Tyranitar|Curse|p2a: Tyranitarp
-# |-unboost|p2a: Tyranitar|spe|1
-# |-boost|p2a: Tyranitar|atk|1
-# |-boost|p2a: Tyranitar|def|1
-# |
-# |-weather|Sandstorm|[upkeep]
-# |upkeep
-# |turn|3
-
-
-# |
-# |t:|1595619885
-# |move|p1a: Mandibuzz|Confide|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spa|1
-# |move|p2a: Tyranitar|Curse|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spe|1
-# |-boost|p2a: Tyranitar|atk|1
-# |-boost|p2a: Tyranitar|def|1
-# |
-# |-weather|Sandstorm|[upkeep]
-# |upkeep
-# |turn|4
-
-
-# |
-# |t:|1595619889
-# |move|p1a: Mandibuzz|Confide|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spa|1
-# |move|p2a: Tyranitar|Curse|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spe|1
-# |-boost|p2a: Tyranitar|atk|1
-# |-boost|p2a: Tyranitar|def|1
-# |
-# |-weather|Sandstorm|[upkeep]
-# |upkeep
-# |turn|5
-
-
-# |
-# |t:|1595619893
-# |move|p1a: Mandibuzz|Confide|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spa|1
-# |move|p2a: Tyranitar|Curse|p2a: Tyranitar
-# |-unboost|p2a: Tyranitar|spe|1
-# |-boost|p2a: Tyranitar|atk|1
-# |-boost|p2a: Tyranitar|def|1
-# |
-# |-weather|none
-# |upkeep
-# |turn|6
-
-
-# |
-# |t:|1595619900
-# |switch|p2a: Abomasnow|Abomasnow, F|100\\/100
-# |-weather|Hail|[from] ability: Snow Warning|[of] p2a: Abomasnow
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |
-# |-weather|Hail|[upkeep]
-# |upkeep
-# |turn|7
-
-
-# |
-# |t:|1595619904
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|Hail|[upkeep]
-# |upkeep
-# |turn|8
-
-
-# |
-# |t:|1595619908
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|Hail|[upkeep]
-# |upkeep
-# |turn|9
-
-
-# |
-# |t:|1595619978
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|Hail|[upkeep]
-# |upkeep
-# |turn|10
-
-
-# |
-# |t:|1595619982
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|none
-# |upkeep
-# |turn|11
-
-
-# |
-# |t:|1595619991
-# |move|p1a: Mandibuzz|Rain Dance|p1a: Mandibuzz
-# |-weather|RainDance
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|RainDance|[upkeep]
-# |upkeep
-# |turn|12
-
-
-# |
-# |t:|1595620005
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|1
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|RainDance|[upkeep]
-# |upkeep
-# |turn|13
-
-
-# |
-# |t:|1595620010
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|RainDance|[upkeep]
-# |upkeep
-# |turn|14
-
-
-# |
-# |t:|1595620013
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|RainDance|[upkeep]
-# |upkeep
-# |turn|15
-
-
-# |
-# |t:|1595620017
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|none
-# |upkeep
-# |turn|16
-
-
-# |
-# |t:|1595620021
-# |move|p1a: Mandibuzz|Sunny Day|p1a: Mandibuzz
-# |-weather|SunnyDay
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|SunnyDay|[upkeep]
-# |upkeep
-# |turn|17
-
-
-# |
-# |t:|1595620026
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|SunnyDay|[upkeep]
-# |upkeep
-# |turn|18
-
-
-# |
-# |t:|1595620030
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|SunnyDay|[upkeep]
-# |upkeep
-# |turn|19
-
-
-# |
-# |t:|1595620034
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|SunnyDay|[upkeep]
-# |upkeep
-# |turn|20
-
-
-# |
-# |t:|1595620039
-# |move|p1a: Mandibuzz|Confide|p2a: Abomasnow
-# |-unboost|p2a: Abomasnow|spa|0
-# |move|p2a: Abomasnow|Sleep Talk||[still]
-# |-fail|p2a: Abomasnow
-# |
-# |-weather|none
-# |upkeep
-# |turn|21
-
-
-# |
-# |t:|1595620055
-# |switch|p2a: Mew|Mew|100\\/100
-# |move|p1a: Mandibuzz|Confide|p2a: Mew
-# |-unboost|p2a: Mew|spa|1
-# |
-# |upkeep
-# |turn|22
-
-
-# |
-# |t:|1595620074
-# |switch|p1a: Mew|Mew|365\\/365
-# |-activate|p2a: Mew|move: Struggle
-# |move|p2a: Mew|Struggle|p1a: Mew
-# |-damage|p1a: Mew|329\\/365
-# |-damage|p2a: Mew|75\\/100|[from] recoil
-# |
-# |upkeep
-# |turn|23
-
-
-# |
-# |t:|1595620171
-# |-activate|p2a: Mew|move: Struggle
-# |move|p2a: Mew|Struggle|p1a: Mew
-# |-damage|p1a: Mew|296\\/365
-# |-damage|p2a: Mew|50\\/100|[from] recoil
-# |move|p1a: Mew|Sandstorm|p1a: Mew
-# |-weather|Sandstorm
-# |
-# |-weather|Sandstorm|[upkeep]
-# |-damage|p2a: Mew|44\\/100|[from] Sandstorm
-# |-damage|p1a: Mew|274\\/365|[from] Sandstorm
-# |upkeep
-# |turn|24
-
-
-# |
-# |t:|1595620180
-# |move|p1a: Mew|Hail|p1a: Mew
-# |-weather|Hail
-# |-activate|p2a: Mew|move: Struggle
-# |move|p2a: Mew|Struggle|p1a: Mew
-# |-damage|p1a: Mew|241\\/365
-# |-damage|p2a: Mew|19\\/100|[from] recoil
-# |
-# |-weather|Hail|[upkeep]
-# |-damage|p2a: Mew|13\\/100|[from] Hail
-# |-damage|p1a: Mew|219\\/365|[from] Hail
-# |upkeep
-# |turn|25
-
-
-# |
-# |t:|1595620189
-# |-activate|p2a: Mew|move: Struggle
-# |move|p2a: Mew|Struggle|p1a: Mew
-# |-damage|p1a: Mew|182\\/365
-# |-damage|p2a: Mew|0 fnt|[from] recoil
-# |faint|p2a: Mew
-# |move|p1a: Mew|Sunny Day|p1a: Mew
-# |-weather|SunnyDay
-# |
-# |-weather|SunnyDay|[upkeep]
-# |upkeep
-
-
-# |
-# |t:|1595620201
-# |switch|p2a: Politoed|Politoed, M|100\\/100
-# |-weather|RainDance|[from] ability: Drizzle|[of] p2a: Politoed
-# |turn|26
-
-
-# |-message|notsid69420 forfeited.
-
-
-# |
-# |win|nottsid69420
 
 
 
@@ -537,11 +539,10 @@ for m in re.finditer(pattern, replay):
 			m = re.search(r'(?<=\|switch\|p([0-9])a: )([^\|]+)', line)
 			switch(m, game)
 
-		# if non dying damage
-		# if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|([0-9]+)\\/([0-9]+)', line) != None:
-		# 	m = re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|([0-9]+)\\/([0-9]+)', line)
-		# 	print("matched damage")
-		# TODO remember that damage from status can come due to the pokemon itself, so "self" might be statuser
+		# if damage
+		if re.search(r'(?<=-damage\|)p([0-9])a: ([^\|]+)\|([^\|]+)\|?([^\|]+)?\|?([^\|]+)?', line) != None:
+			m = re.search(r'(?<=-damage\|)p([0-9])a: ([^\|]+)\|([^\|]+)\|?([^\|]+)?\|?([^\|]+)?', line)
+			damage(m, game)
 
 		# if move
 		if re.search(r'(?<=\|move\|p([0-9])a: )([^\|]+)\|([^\|]+)', line) != None:
@@ -557,10 +558,6 @@ for m in re.finditer(pattern, replay):
 		if re.search(r'(?<=-end\|p([0-9])a: )([^\|]+)\|Leech Seed', line) != None:
 			m = re.search(r'(?<=-end\|p([0-9])a: )([^\|]+)\|Leech Seed', line)
 			ls_end(m, game)
-
-		# if other pokemon specific hazard starts 
-		# 
-		# if other pokemon specific hazard ends
 
 		# if hazards start
 		if re.search(r'(?<=-sidestart\|p([0-9]): )[^\|]+\|(move: )?(.*)', line) != None:
@@ -596,18 +593,6 @@ for m in re.finditer(pattern, replay):
 		if re.search(r'(?<=-miss\|p([0-9])a: )([^\|]+)', line) != None:
 			m = re.search(r'(?<=-miss\|p([0-9])a: )([^\|]+)', line)
 			miss(m, game)
-		
-		# if dying damage (faint), update kill and damage for respective pokemon
-		if re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line) != None:
-			m = re.search(r'(?<=-damage\|p([0-9])a: )([^\|]+)\|0 fnt(.*)', line)
-			# print("matched dying damage")
-			# # group 1 is player num
-			# print(m.group(1))
-			# # group 2 is pokemon nickname
-			# print(m.group(2))
-			# # group 3 is additional data
-			# # look for tox, brn, poison, leech seed, sandstorm, hail, spikes, rocks, 
-			# print(m.group(3))
 
 		# if faint, clear pok1 or pok2, and update death for current pokemon
 		if re.search(r'(?<=faint\|p([0-9])a: )(.*)', line) != None:
@@ -618,6 +603,7 @@ for m in re.finditer(pattern, replay):
 		# TODO destiny bond
 		# TODO future sight
 		# TODO yawn
+		# TODO ghost curse
 
 		# TODO increment active turns for pokemon that are alive
 		# update turn data on each side
@@ -634,9 +620,7 @@ for m in re.finditer(pattern, replay):
 # increment appearance value in db for all pokemon in p1pok and p2pok
 
 # get actual player names, calculate score and return stats
-db_print_weather(game)
-
-
+db_test_damage_regex()
 
 
 
