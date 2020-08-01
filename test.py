@@ -442,7 +442,7 @@ replay = """
 |c| yeeeur|LMFAO
 
 
-|c|☆alishahc|f
+|c|alishahc|f
 
 
 |c| sid69420|HP ICE BACK AT IT
