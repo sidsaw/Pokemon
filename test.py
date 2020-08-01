@@ -15,7 +15,7 @@ html,body {font-family:Verdana, sans-serif;font-size:10pt;margin:0;padding:0;}bo
 <input type="hidden" name="replayid" value="gen6ou-1152590909" />
 <div class="battle"></div><div class="battle-log"></div><div class="replay-controls"></div><div class="replay-controls-2"></div>
 <h1 style="font-weight:normal;text-align:center"><strong>[Gen 6] OU</strong><br /><a href="http://pokemonshowdown.com/users/samsarin23" class="subtle" target="_blank">samsarin23</a> vs. <a href="http://pokemonshowdown.com/users/alishahc" class="subtle" target="_blank">alishahc</a></h1>
-<script type="text/plain" class="battle-log-data">|j|☆samsarin23
+<script type="text/plain" class="battle-log-data">|j|samsarin23
 |j|alishahc
 
 
