@@ -984,6 +984,7 @@ for m in re.finditer(pattern, replay):
 	if not result:
 		# TODO figure out how to actual error handle this
 		print("couldn't parse pokemon for hp stat: " + pokactual)
+		return
 	print(result[0][0])
 	game.sides[playernum].pokemon[poknickname].name = pokactual
 
