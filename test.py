@@ -56,7 +56,7 @@ replay = """
 
 |
 |start
-|switch|p1a: Oopsie|Uxie|100\\/100
+|switch|p1a: Oopsie|Uxi|100\\/100
 |switch|p2a: Jirachi|Jirachi|404\\/404
 |turn|1
 
