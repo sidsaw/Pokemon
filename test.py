@@ -499,15 +499,19 @@ for m in re.finditer(pattern, replay):
 	playernum = m.group(1)
 	poknickname = m.group(2)
 	pokactual = m.group(3)
+	# skip duplicates
+	if poknickname in game.sides[playernum].pokemon:
+		continue
 	game.sides[playernum].pokemon[poknickname] = Pokemon()
 	# TODO query db for pokemon HP stat and set hp stat for pokemon
+	print("querying for: " + pokactual)
 	statement = "SELECT hp FROM pokedex WHERE pokemon=?"
 	curs.execute(statement, (pokactual,))
 	result = curs.fetchall()
 	if not result:
 		# TODO figure out how to actual error handle this
 		print("couldn't parse pokemon for hp stat: " + pokactual)
-	print(result)
+	print(result[0][0])
 	game.sides[playernum].pokemon[poknickname].name = pokactual
 
 # get text before turn 1, get first 2 pokemon and possible weathers
@@ -632,7 +636,7 @@ for m in re.finditer(pattern, replay):
 # increment appearance value in db for all pokemon in p1pok and p2pok
 
 # get actual player names, calculate score and return stats
-db_test_damage_regex()
+
 conn.close()
 
 
