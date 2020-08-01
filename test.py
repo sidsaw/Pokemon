@@ -463,6 +463,8 @@ class Game:
 		# stores last event in game
 		self.lastevent = ""
 
+conn = connect('/home/ec2-user/Pokemon/pokemon.db')
+curs = conn.cursor()
 
 game = Game()
 # get replay id
@@ -470,7 +472,6 @@ replayid = re.search('(?<=gen[0-9]ou-)[0-9]+', replay).group(0)
 game.replayid = replayid
 
 # get player names
-# TODO check if works with spaces
 p1name = re.search('(?<=\|player\|p1\|)[^\|]+', replay).group(0)
 game.sides['1'].playername = p1name
 p2name = re.search('(?<=\|player\|p2\|)[^\|]+', replay).group(0)
@@ -495,9 +496,19 @@ game.sides['2'].startingnumpok = len(p2pok)
 # group 1 is playernum, group 2 is nickname, group 3 is actual pokemon name
 pattern = re.compile(r'(?<=\|switch\|p([0-9])a: )([^\|]+)\|([^\|,]+)')
 for m in re.finditer(pattern, replay):
-	game.sides[m.group(1)].pokemon[m.group(2)] = Pokemon()
+	playernum = m.group(1)
+	poknickname = m.group(2)
+	pokactual = m.group(3)
+	game.sides[playernum].pokemon[poknickname] = Pokemon()
 	# TODO query db for pokemon HP stat and set hp stat for pokemon
-	game.sides[m.group(1)].pokemon[m.group(2)].name = m.group(3)
+	statement = "SELECT HP FROM pokedex WHERE NAME=?"
+	curs.execute(statement, (pokactual,))
+	result = curs.fetchall()
+	if not result:
+		# TODO figure out how to actual error handle this
+		print("couldn't parse pokemon for hp stat: " + pokactual)
+	print(result)
+	game.sides[playernum].pokemon[poknickname].name = pokactual
 
 # get text before turn 1, get first 2 pokemon and possible weathers
 preturn1data = re.search(r'((.|\n)*?)(?=\|turn\|1)', replay).group(0)
@@ -511,7 +522,6 @@ game.sides['2'].activepok = startp2pok
 
 startweather = re.compile(r'(?<=-weather)\|([^\|]+)\|([^\|]+)\|\[of\] p([0-9])a: (.*)')
 for m in re.finditer(startweather, preturn1data):
-	print('found preturn1 weather match')
 	# clear weather
 	game.weather['sandstorm'] = ""
 	game.weather['hail'] = ""
@@ -600,6 +610,8 @@ for m in re.finditer(pattern, replay):
 			faint(m, game)
 
 		# TODO if heal
+		# TODO if mega
+		# change HP stat and actual pok name (not nickname)
 		# TODO destiny bond
 		# TODO future sight
 		# TODO yawn
@@ -621,6 +633,7 @@ for m in re.finditer(pattern, replay):
 
 # get actual player names, calculate score and return stats
 db_test_damage_regex()
+conn.close()
 
 
 

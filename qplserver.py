@@ -39,6 +39,7 @@ def server():
 				'log': 'Received post request and fileids',
 				'idsneeded': idsneeded
 			}
+			conn.close()
 			return jsonify(data)
 
 		# if files and neededids are in data
@@ -47,7 +48,7 @@ def server():
 			print("detected files and idsneeded in form data")
 			files = requestdata.get('files')
 			idsneeded = requestdata.get('idsneeded')
-			return decodeandparse(files, idsneeded, curs)			
+			return decodeandparse(files, idsneeded, conn)			
 
 		else:
 			print("did not detect fileids, files, idsneeded in form data")
@@ -55,6 +56,7 @@ def server():
 			data = {
 				'log': 'Received post request but did not find fileids or (files and idsneeded)'
 			}
+			conn.close()
 			return jsonify(data)
 
 	# TODO change to sending back a status code as well
@@ -62,10 +64,12 @@ def server():
 	data = {
 		'log': 'Did not receive post request'
 	}
+	conn.close()
 	return jsonify(data)
 
 
-def decodeandparse(files, idsneeded, curs):
+def decodeandparse(files, idsneeded, conn):
+	curs = conn.cursor()
 	# decode files to string
 	decodedfiles = []
 	printable = set(string.printable)
@@ -122,6 +126,7 @@ def decodeandparse(files, idsneeded, curs):
 	data = {
 		'log': logstring
 	}
+	conn.close()
 	return jsonify(data)
 
 # Calculates stats for a file
