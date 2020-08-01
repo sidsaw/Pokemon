@@ -501,7 +501,7 @@ for m in re.finditer(pattern, replay):
 	pokactual = m.group(3)
 	game.sides[playernum].pokemon[poknickname] = Pokemon()
 	# TODO query db for pokemon HP stat and set hp stat for pokemon
-	statement = "SELECT HP FROM pokedex WHERE NAME=?"
+	statement = "SELECT hp FROM pokedex WHERE pokemon=?"
 	curs.execute(statement, (pokactual,))
 	result = curs.fetchall()
 	if not result:
